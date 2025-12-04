@@ -1,99 +1,77 @@
-> このページを開く [https://tipyman.github.io/zeta_r3/](https://tipyman.github.io/zeta_r3/)
+# ZETA-R3 MakeCode Extension
 
-## 拡張機能として使用
-
-このリポジトリは、MakeCode で **拡張機能** として追加できます。
-
-* [https://makecode.microbit.org/](https://makecode.microbit.org/) を開く
-* **新しいプロジェクト** をクリックしてください
-* ギアボタンメニューの中にある **拡張機能** をクリックしてください
-* **https://github.com/tipyman/zeta_r3** を検索してインポートします。
-
-## このプロジェクトを編集します
-
-
-# ZETA-R3 MakeCode拡張
-
-このMakeCode拡張は、micro:bitを使用して **ZETA-R3モジュール**とUART通信を行うためのブロックを提供します。  
-ZETAコマンド送信、応答受信、モジュール情報の取得（MACアドレス、プロトコルバージョン、ネットワーク状態など）をサポートします。
+This MakeCode extension provides blocks to communicate with **ZETA-R3 modules** via UART on micro:bit.  
+It supports sending commands, receiving responses, and querying module information such as MAC address, protocol version, and network status.
 
 ---
 
-#### 特徴
-- UARTによるバイナリ通信
-- CRC16（XMODEM）によるデータ整合性チェック
-- センサーデータ送信
-- モジュールステータスやMACアドレスの取得
-- ネットワーク時間・品質の取得
+#### Features
+- Send ZETA commands with CRC16 (XMODEM)
+- Transmit sensor data
+- Query module status and MAC address
+- Get protocol version, network time, and network quality
+- UART binary communication support
 
 ---
 
-* [https://makecode.microbit.org/](https://makecode.microbit.org/) を開く
-* **読み込む** をクリックし、 **URLから読み込む...** をクリックしてください
-* **https://github.com/tipyman/zeta_r3** を貼り付けてインポートをクリックしてください
+## Blocks Overview
 
-#### メタデータ (検索、レンダリングに使用)
-
-* for PXT/microbit
-<script src="https://makecode.com/gh-pages-embed.js"></script><script>makeCodeRender("{{ site.makecode.home_url }}", "{{ site.github.owner_name }}/{{ site.github.repository_name }}");</script>
-
-### **ZETAコマンド送信**
-Send ZETA command [リスト]
-任意のZETAコマンドを送信し、応答データを受信します。
+### **Transmit ZETA Command**
+Send ZETA command [list]
+Send a custom ZETA command array and receive the response.
 
 ---
 
-### **ZETAデータ送信**
+### **Transmit ZETA Data**
 
-Transmit ZETA data [リスト]
-センサーデータをZETAモジュールに送信します。
-応答状況を返します。
+Transmit ZETA data [list]
+Send sensor data to the ZETA module.
 
 ---
 
-### **MACアドレス取得**
+### **Get MAC Address**
 
 Get MAC address
-4バイトのMACアドレスを配列で返します。
+Returns an array of 4 bytes representing the MAC address.
 
 ---
 
-### **モジュールステータス取得**
+### **Get Module Status**
 
 Get Module Status
-モジュールの状態コードを返します。
+Returns the module status code.
 
 ---
 
-### **プロトコルバージョン取得**
+### **Get Protocol Version**
 
 Get Protocol Version
-プロトコルバージョンを数値で返します。
+Returns the protocol version as a number.
 
 ---
 
-### **ネットワーク時間取得**
+### **Get Network Time**
 
 Get Network Time
-ネットワーク時間を配列で返します（5～11バイト目）。
+Returns an array representing the network time (bytes 5–11).
 
 ---
 
-### **ネットワーク品質取得**
+### **Get Network Quality**
 
 Get Network Quality
-ネットワーク品質指標を返します。
+Returns the network quality indicator.
 
 ---
 
-### **応答データ受信**
+### **Receive Query Data**
 
 Receive Query Data
-モジュールからの応答データを配列で返します。
+Receives and returns the raw response array from the module.
 
 ---
 
-## インストール方法
-1. MakeCode for micro:bit を開きます。
-2. **拡張**をクリックします。
-3. `https://github.com/<あなたのリポジトリ名>` を入力して追加します。
+## Installation
+1. Open MakeCode for micro:bit.
+2. Click **Extensions**.
+3. Search for `https://github.com/<your-repo-name>` and add it.
