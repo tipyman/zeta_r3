@@ -1,13 +1,11 @@
 {
     "name": "ZETA(R3)",
-    "description": "",
+    "description": "ZETA(R3) module control blocks for micro:bit",
+    "license": "MIT",
     "dependencies": {
-        "core": "*",
-        "radio": "*",
-        "microphone": "*"
+        "core": "*"
     },
     "files": [
-        "main.blocks",
         "main.ts",
         "README.md"
     ],
