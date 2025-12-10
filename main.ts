@@ -151,9 +151,9 @@ namespace ZETA_R3 {
 
         while (true) {
             const data = UART_BIN_RX();
-            if (data === 0xfa) break;
+            if (data == 0xfa) break;
             timeoutCounter++;
-            if (timeoutCounter > 15) return response; // Timeout
+            if (timeoutCounter > 250) return response; // Timeout
         }
 
         if (UART_BIN_RX() === 0xf5) {
