@@ -146,7 +146,7 @@ namespace ZETA_R3 {
      */
     //% blockId=ZETA_receive_query block="Receive Query Data"
     export function receive_query(): number[] {
-        const response = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        let response = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
         let timeoutCounter = 0;
 
         while (true) {
@@ -165,6 +165,7 @@ namespace ZETA_R3 {
             for (let i = 0; i < length; i++) {
                 response[3 + i] = UART_BIN_RX();
             }
+            response = response.slice(0, 3 + length)
         }
         return response;
     }
