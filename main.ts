@@ -146,26 +146,25 @@ namespace ZETA_R3 {
      */
     //% blockId=ZETA_receive_query block="Receive Query Data"
     export function receive_query(): number[] {
-        let response = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
         let timeoutCounter = 0;
 
         while (true) {
             const data = UART_BIN_RX();
             if (data == 0xfa) break;
             timeoutCounter++;
-            if (timeoutCounter > 250) return response; // Timeout
+            if (timeoutCounter > 250) return [1]; // Timeout
         }
 
-        if (UART_BIN_RX() === 0xf5) {
-            response[0] = 0xfa;
-            response[1] = 0xf5;
-            const length = UART_BIN_RX();
-            response[2] = length;
+        if (UART_BIN_RX() != 0xf5) {
+            return [1];
+        }
 
-            for (let i = 0; i < length; i++) {
-                response[3 + i] = UART_BIN_RX();
-            }
-            response = response.slice(0, 3 + length)
+        const length = UART_BIN_RX();
+        let response: number[] = [0xFA, 0xF5, length];
+
+        for (let i = 0; i < length; i++) {
+                const d = UART_BIN_RX();
+                response.push(d);
         }
         return response;
     }
