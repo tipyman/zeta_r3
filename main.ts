@@ -62,7 +62,7 @@ namespace ZETA_R3 {
      * @returns 応答データ配列
      */
     //% blockId=ZETA_command_assert block="Send ZETA command %txArray"
-    //% txArray.shadow="lists_create_with"
+    //% weight=80 blockGap=8
     export function command_assert(txArray: number[]): number[] {
         pins.digitalWritePin(DigitalPin.P2, 0);  // Wakeup on
         basic.pause(20); // The specification requires 10ms, but use 20ms for safety
@@ -89,7 +89,7 @@ namespace ZETA_R3 {
      * @returns 応答コード
      */
     //% blockId=ZETA_data_tx block="Transmit ZETA data %txArray"
-    //% txArray.shadow="lists_create_with"
+    //% weight=80 blockGap=8
     export function data_tx(txArray: number[]): number {
         const header = [0xfa, 0xf5, txArray.length + 3, 0x02];
         const response = command_assert(header.concat(txArray));
