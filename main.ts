@@ -1,11 +1,11 @@
 /**
-* makecode ZETA(R3) module Package Release 1
+* makecode ZETA(R3) module Package Release 1.1
 * By 2025 Socionext Inc. and ZETA alliance Japan
-* Written by M.Urade　2025/12/4
+* Written by M.Urade　2025/12/11
 */
 
 /**
-* ZETA(R3) block Ver1
+* ZETA(R3) block Ver1.1
 */
 //% weight=100 color=#0096FF icon="\uf434" block="ZETA-R3"
 
