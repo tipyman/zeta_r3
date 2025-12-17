@@ -1,11 +1,10 @@
 /**
-* makecode ZETA(R3) module Package Release 1.1
-* By 2025 Socionext Inc. and ZETA alliance Japan
-* Written by M.Urade　2025/12/11
+* makecode ZETA(R3) module Package Release 1.2
+* Written by Msakazu Urade (Tipyman)　2025/12/17
 */
 
 /**
-* ZETA(R3) block Ver1.1
+* ZETA(R3) block Ver1.2
 */
 //% weight=100 color=#0096FF icon="\uf434" block="ZETA-R3"
 
@@ -62,6 +61,7 @@ namespace ZETA_R3 {
      * @returns 応答データ配列
      */
     //% blockId=ZETA_command_assert block="Send ZETA command %txArray"
+    //% group="Send data" weight=95 blockGap=8
     //% weight=80 blockGap=8
     export function command_assert(txArray: number[]): number[] {
         pins.digitalWritePin(DigitalPin.P2, 0);  // Wakeup on
@@ -89,7 +89,7 @@ namespace ZETA_R3 {
      * @returns 応答コード
      */
     //% blockId=ZETA_data_tx block="Transmit ZETA data %txArray"
-    //% weight=80 blockGap=8
+    //% group="Send data" weight=95 blockGap=8
     export function data_tx(txArray: number[]): number {
         const header = [0xfa, 0xf5, txArray.length + 3, 0x02];
         const response = command_assert(header.concat(txArray));
@@ -100,6 +100,7 @@ namespace ZETA_R3 {
      * MACアドレス取得
      */
     //% blockId=ZETA_inquire_mac block="Get MAC address"
+    //% group="Module Control" weight=95 blockGap=8
     export function Inquire_MAC(): number[] {
         const response = command_assert([0xfa, 0xf5, 0x03, 0x10]);
         return [response[4], response[5], response[6], response[7]];
@@ -109,6 +110,7 @@ namespace ZETA_R3 {
      * モジュールステータス取得
      */
     //% blockId=ZETA_inquire_status block="Get Module Status"
+    //% group="Module Control" weight=95 blockGap=8
     export function Inquire_Module_Status(): number {
         const response = command_assert([0xfa, 0xf5, 0x03, 0x14]);
         return response[3];
@@ -118,6 +120,7 @@ namespace ZETA_R3 {
      * プロトコルバージョン取得
      */
     //% blockId=ZETA_inquire_version block="Get Protocol Version"
+    //% group="Module Control" weight=95 blockGap=8
     export function Inquire_Version(): number {
         const response = command_assert([0xfa, 0xf5, 0x03, 0x00]);
         return (response[4] << 8) + response[5];
@@ -127,6 +130,7 @@ namespace ZETA_R3 {
      * ネットワーク時間取得（5～11バイト目）
      */
     //% blockId=ZETA_inquire_network_time block="Get Network Time"
+    //% group="Module Control" weight=95 blockGap=8
     export function Inquire_Network_Time(): number[] {
         return command_assert([0xfa, 0xf5, 0x03, 0x11]).slice(4, 11);
     }
@@ -135,6 +139,7 @@ namespace ZETA_R3 {
      * ネットワーク品質取得
      */
     //% blockId=ZETA_inquire_network_quality block="Get Network Quality"
+    //% group="Module Control" weight=95 blockGap=8
     export function Inquire_Network_Quality(): number {
         const response = command_assert([0xfa, 0xf5, 0x03, 0x13]);
         return response[4];
@@ -145,7 +150,8 @@ namespace ZETA_R3 {
      * @returns 応答データ配列
      */
     //% blockId=ZETA_receive_query block="Receive Query Data"
-    export function receive_query(): number[] {
+//% group="Receive data" weight=95 blockGap=8
+   export function receive_query(): number[] {
         let timeoutCounter = 0;
 
         while (true) {
