@@ -61,7 +61,7 @@ namespace ZETA_R3 {
      * @returns 応答データ配列
      */
     //% blockId=ZETA_command_assert block="Send ZETA command %txArray"
-    //% group="Send data" weight=95 blockGap=8
+    //% group="Send data with query" weight=95 blockGap=8
     export function command_assert(txArray: number[]): number[] {
         pins.digitalWritePin(DigitalPin.P2, 0);  // Wakeup on
         basic.pause(20); // The specification requires 10ms, but use 20ms for safety
@@ -88,7 +88,7 @@ namespace ZETA_R3 {
      * @returns 応答コード
      */
     //% blockId=ZETA_data_tx block="Transmit ZETA data %txArray"
-    //% group="Send data" weight=95 blockGap=8
+    //% group="Send data with query" weight=95 blockGap=8
     export function data_tx(txArray: number[]): number {
         const header = [0xfa, 0xf5, txArray.length + 3, 0x02];
         const response = command_assert(header.concat(txArray));
@@ -100,7 +100,7 @@ namespace ZETA_R3 {
      * @param txArray データ配列
      */
     //% blockId=ZETA_data_tx_no_query block="Transmit ZETA data only %txArray"
-    //% group="Send data" weight=95 blockGap=8
+    //% group="Send data without query" weight=95 blockGap=8
     export function data_tx_noQ(txArray: number[]) {
         const header = [0xfa, 0xf5, txArray.length + 3, 0x02];
         const response = command_assert(header.concat(txArray));
