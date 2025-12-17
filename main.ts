@@ -62,7 +62,6 @@ namespace ZETA_R3 {
      */
     //% blockId=ZETA_command_assert block="Send ZETA command %txArray"
     //% group="Send data" weight=95 blockGap=8
-    //% weight=80 blockGap=8
     export function command_assert(txArray: number[]): number[] {
         pins.digitalWritePin(DigitalPin.P2, 0);  // Wakeup on
         basic.pause(20); // The specification requires 10ms, but use 20ms for safety
