@@ -99,7 +99,7 @@ namespace ZETA_R3 {
      * データ送信 クエリを返信しない
      * @param txArray データ配列
      */
-    //% blockId=ZETA_data_tx　w/o query block="Transmit ZETA data only %txArray"
+    //% blockId=ZETA_data_tx without query block="Transmit ZETA data only %txArray"
     //% group="Send data" weight=95 blockGap=8
     export function data_tx_noQ(txArray: number[]) {
         const header = [0xfa, 0xf5, txArray.length + 3, 0x02];
