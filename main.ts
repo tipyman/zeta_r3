@@ -97,6 +97,47 @@ namespace ZETA_R3 {
     }
 
     /**
+     * データ送信 クエリを返信しない
+     * @param txArray データ配列
+     */
+    //% blockId=ZETA_data_tx　w/o query block="Transmit ZETA data only %txArray"
+    //% group="Send data" weight=95 blockGap=8
+    export function data_tx_noQ(txArray: number[]) {
+        const header = [0xfa, 0xf5, txArray.length + 3, 0x02];
+        const response = command_assert(header.concat(txArray));
+    }
+
+    /**
+     * 応答データ受信
+     * @returns 応答データ配列
+     */
+    //% blockId=ZETA_receive_query block="Receive Query Data"
+    //% group="Receive data" weight=95 blockGap=8
+    export function receive_query(): number[] {
+        let timeoutCounter = 0;
+
+        while (true) {
+            const data = UART_BIN_RX();
+            if (data == 0xfa) break;
+            timeoutCounter++;
+            if (timeoutCounter > 250) return [1]; // Timeout
+        }
+
+        if (UART_BIN_RX() != 0xf5) {
+            return [1];
+        }
+
+        const length = UART_BIN_RX();
+        let response: number[] = [0xFA, 0xF5, length];
+
+        for (let i = 0; i < length; i++) {
+            const d = UART_BIN_RX();
+            response.push(d);
+        }
+        return response;
+    }
+
+    /**
      * MACアドレス取得
      */
     //% blockId=ZETA_inquire_mac block="Get MAC address"
@@ -143,35 +184,5 @@ namespace ZETA_R3 {
     export function Inquire_Network_Quality(): number {
         const response = command_assert([0xfa, 0xf5, 0x03, 0x13]);
         return response[4];
-    }
-
-    /**
-     * 応答データ受信
-     * @returns 応答データ配列
-     */
-    //% blockId=ZETA_receive_query block="Receive Query Data"
-//% group="Receive data" weight=95 blockGap=8
-   export function receive_query(): number[] {
-        let timeoutCounter = 0;
-
-        while (true) {
-            const data = UART_BIN_RX();
-            if (data == 0xfa) break;
-            timeoutCounter++;
-            if (timeoutCounter > 250) return [1]; // Timeout
-        }
-
-        if (UART_BIN_RX() != 0xf5) {
-            return [1];
-        }
-
-        const length = UART_BIN_RX();
-        let response: number[] = [0xFA, 0xF5, length];
-
-        for (let i = 0; i < length; i++) {
-                const d = UART_BIN_RX();
-                response.push(d);
-        }
-        return response;
     }
 }
