@@ -20,7 +20,7 @@ ZETA-R3 — MakeCode拡張（micro:bit → ZETA TZM902DP 制御）
     ・ micro:bit P0(RX) → ZETA TX
     ・ UARTをピンで使うため、serial.redirect(P1, P0, 115200) を最初に実行してください。
 ・ Wakeup 制御: P2（アクティブ"L"）
-    ・ 起動時に Low → 10〜20ms → High のパルスでウェイク（関数側でも制御します）
+    ・ 起動時に Low → 10〜20ms → High のパルスでウェイク（関数側で制御します）
 ・ 通知入力: P8（アクティブ"H"）
     ・ モジュール側からの通知信号を Highパルスで受けます（イベントは pins.onPulsed() が便利）。
 ・ 占有ピン: P0 / P1 / P2 / P8（他機能と混在不可）
